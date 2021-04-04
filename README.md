@@ -1,3 +1,219 @@
+## 2021-4-4
+
+前中后层序遍历:
+
+```js
+/**
+ * 在这里写代码以获得语法提示
+ */
+
+function front(root) {
+  let stack = [root];
+  while (stack.length) {
+    let node = stack.pop();
+    stack.show();
+    node.right && stack.push(node.right);
+    node.left && stack.push(node.left);
+  }
+}
+
+function middle(root) {
+  let stack = [];
+  while (stack.length || root) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      root = stack.pop();
+      root.show();
+      root = root.right;
+    }
+  }
+}
+
+function end(root) {
+  let stack1 = [root];
+  let stack2 = [];
+  while (stack1.length) {
+    let node = stack1.pop();
+    stack2.push(node);
+    node.left && stack1.push(node.left);
+    node.right && stack1.push(node.right);
+  }
+  while (stack2.length) {
+    stack2.pop().show();
+  }
+}
+
+function ceng(root) {
+  let queue = [root];
+  while (queue.length) {
+    let node = queue.shift();
+    node.show();
+    node.left && queue.push(node.left);
+    node.right && queue.push(node.right);
+  }
+}
+```
+
+插入排序:
+
+```js
+function insertSort(arr) {
+  if (!Array.isArray(arr) || arr.length < 1) return;
+  let len = arr.length;
+  let i = 1;
+  while (i < len) {
+    let tmp = arr[i];
+    for (let j = i; j > 0; j--) {
+      if (tmp < arr[j - 1]) arr[j] = arr[j - 1];
+      else break;
+    }
+    arr[j] = tmp;
+    i++;
+  }
+}
+```
+
+封装 ajax/fetch:
+
+```js
+function fetchRequest(method, url, data = {}, timeout = 5000) {
+  let payload = null;
+  let query = "";
+  if (method === "GET") {
+    for (const key in data) {
+      query += `&${key}=${data[key]}`;
+    }
+    if (query) {
+      query = "?" + query.slice(1);
+    }
+  } else {
+    payload = JSON.stringify(data);
+  }
+
+  return new Promise((resolve, reject) => {
+    fetch(url + query, {
+      credentials: "include",
+      method: method,
+      header: {
+        "Content-Type": "xxx",
+      },
+      body: payload,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+    setTimeout(() => {
+      reject(reject.bind(this, "fetch i timeout"));
+    }, timeout);
+  });
+}
+
+function clickFetchRequest() {
+  fetchRequest("GET", "xxx")
+    .then((res) => {
+      console.log("Fetch success", res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+clickFetchRequest();
+```
+
+```js
+function ajax(method, url, data, sccess, fail) {
+  const XHR = new XMLHttpRequest();
+  let sendData = "";
+  for (const key in data) {
+    sendData += "&" + key + "=" + data[key];
+  }
+  switch (method) {
+    case "GET":
+      url = sendData ? `${url}?${sendData}` : url;
+      sendData = null;
+      break;
+    case "POST":
+      if (sendData) {
+        sendData = sendData.slice(1);
+      }
+      break;
+  }
+  XHR.onreadystatechange = function () {
+    if (XHR.readyState !== 4) return;
+    if (XHR.status === 200 || XHR.status === 304) {
+      typeof sccess === "function" && success(XHR.response);
+    } else {
+      typeof fail === "function" && fail(XHR);
+    }
+  };
+  XHR.open(method, url, true);
+  XHR.setRequestHeader("Content-Type", "application/x-www/from-urlencoded");
+  XHR.send(sendData);
+}
+
+function ajaxRequest() {
+  const error = {
+    message: "",
+    info: null,
+  };
+  ajax({
+    url: "xxx",
+    method: "GET",
+    data: {},
+    overtime: 5000,
+    success: function (res, response) {
+      console.log("请求成功", res);
+      console.log("原始响应数据 >>", response);
+    },
+    fail: function (err) {},
+  });
+}
+```
+
+内存泄漏
+
+选择器
+
+es6-异步解决方案
+
+作用域
+
+http2
+
+setState 同步异步
+
+代码压缩原理 : 表达式语句”才能被合并
+
+小程序生命周期
+
+57
+
+```js
+var twoSum = function (nums, target) {
+  let i = 0;
+  let j = nums.length - 1;
+  while (i < j) {
+    let tmp = nums[i] + nums[j];
+    if (tmp === target) return [nums[i], nums[j]];
+    if (tmp > target) {
+      j--;
+    }
+    if (tmp < target) {
+      i++;
+    }
+  }
+};
+```
+
 ## 2021-4-3
 
 冒泡排序:
