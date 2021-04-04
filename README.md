@@ -164,9 +164,42 @@ function createStore(reducer, preloadedState, enhancer) {
 
 重绘与回流
 
-幽灵空白节点，li与li之间的空白
+幽灵空白节点，li 与 li 之间的空白
 
 变量提升/暂时性死区
+
+instanceof，typeof
+
+> Symbol.hasInstance 是 es6 的一个内置的符号,用于暴露语言内部的行为，开发者可以直接访问或重写或模拟这些行为，以 Symbol 工厂函数字符串属性的形式存在，这个主要表示：一个方法，该方法决定一个构造器对象是否认可一个个对象说是他的实例有 instanceof 使用 `Object[Symbol.hasInstanceof](arr)` //true
+
+头部字段-大文件传输
+
+组件，高阶组件
+
+source-map
+
+小程序的缓存优化
+
+53-1 , 53-2
+
+```js
+var search = function (nums, target) {
+  let count = 0;
+  nums.forEach((item) => {
+    if (item === target) count++;
+  });
+  return count;
+};
+```
+
+```js
+var missingNumber = function (nums) {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== i) return i;
+  }
+  return nums.length;
+};
+```
 
 ## 2021-4-2
 
